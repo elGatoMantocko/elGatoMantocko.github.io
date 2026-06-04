@@ -2,7 +2,7 @@ import { Sun, Moon, Monitor } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import { ScriptOnce } from '@tanstack/react-router';
-import { cn } from '#/lib/utils';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Text } from '@/components/ui/Text';
 import { Group } from '@/components/ui/Group';
