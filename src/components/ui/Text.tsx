@@ -5,22 +5,23 @@ import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 
-const textVariant = cva('group/text text-base', {
+const textVariant = cva('group/text', {
   variants: {
     variant: {
-      default: 'font-(family-name:--jetbrains-mono)',
-      caption: 'text-sm font-(family-name:--jetbrains-mono)',
-      title: 'xl:text-9xl text-6xl font-(family-name:--geist-mono)',
-      h1: 'text-4xl font-(family-name:--geist-mono)',
-      h2: 'text-3xl font-(family-name:--geist-mono)',
-      h3: 'text-2xl font-(family-name:--geist-mono)',
+      default: 'mb-2 xl:text-lg text-base font-(family-name:--font-body)',
+      caption: 'text-sm font-(family-name:--font-body)',
+      title:
+        'xl:text-9xl text-7xl font-(family-name:--font-heading) mb-8 xl:mb-16',
+      h1: 'text-4xl mb-4 font-(family-name:--font-heading)',
+      h2: 'text-3xl mb-4 font-(family-name:--font-heading)',
+      h3: 'text-2xl mb-4 font-(family-name:--font-heading)',
     },
     color: {
       primary: 'text-primary',
       secondary: 'text-secondary',
     },
     margin: {
-      default: 'mb-4',
+      default: '',
       auto: 'my-auto',
       none: 'm-0',
     },

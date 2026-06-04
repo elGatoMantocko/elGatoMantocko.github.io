@@ -11,9 +11,8 @@
 body {
   @apply m-0;
   font-family:
-    -apple-system, 'JetBrains Mono Variable', BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -57,9 +56,6 @@ code {
   --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
   --sidebar-border: oklch(0.925 0.005 214.3);
   --sidebar-ring: oklch(0.723 0.014 214.4);
-
-  --jetbrains-mono: 'JetBrains Mono Variable', monospace;
-  --geist-mono: 'Geist Mono Variable', monospace;
 }
 
 .dark {
@@ -138,6 +134,7 @@ code {
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --font-heading: var(--font-mono);
+  --font-body: 'JetBrains Mono Variable', monospace;
   --font-mono: 'Geist Mono Variable', monospace;
 }
 
@@ -150,6 +147,7 @@ code {
   }
   html {
     @apply font-mono;
+    @apply font-body;
   }
 
   /* cursor: pointer for non-disabled buttons. tailwind swapped to default in v4 */
