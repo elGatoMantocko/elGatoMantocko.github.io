@@ -14,6 +14,18 @@
     "**/.classpath",
     "**/.setting",
     "**/routeTree.gen.ts",
-    "**/yarn-*.cjs",
+    "**/yarn-*.cjs"
   ],
+  "line_ending": "enforce_lf",
+  "lsp": {
+    "vscode-css-language-server": {
+      "settings": {
+        "css": {
+          "lint": {
+            "unknownAtRules": "ignore"
+          }
+        }
+      }
+    }
+  }
 }

@@ -12,3 +12,11 @@ dist-ssr
 __unconfig*
 todos.json
 .content-collections
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

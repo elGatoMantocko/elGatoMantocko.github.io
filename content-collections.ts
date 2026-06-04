@@ -1,5 +1,5 @@
-import { defineCollection, defineConfig } from '@content-collections/core'
-import { z } from 'zod'
+import { defineCollection, defineConfig } from '@content-collections/core';
+import { z } from 'zod';
 
 const jobs = defineCollection({
   name: 'jobs',
@@ -8,14 +8,14 @@ const jobs = defineCollection({
   schema: z.object({
     jobTitle: z.string(),
     summary: z.string(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
+    startDate: z.iso.date(),
+    endDate: z.iso.date().optional(),
     company: z.string(),
     location: z.string(),
     tags: z.array(z.string()),
     content: z.string(),
   }),
-})
+});
 
 const education = defineCollection({
   name: 'education',
@@ -24,13 +24,14 @@ const education = defineCollection({
   schema: z.object({
     school: z.string(),
     summary: z.string(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
+    location: z.string(),
+    startDate: z.iso.date(),
+    endDate: z.iso.date(),
     tags: z.array(z.string()),
     content: z.string(),
   }),
-})
+});
 
 export default defineConfig({
-  collections: [jobs, education],
-})
+  content: [jobs, education],
+});
