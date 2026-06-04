@@ -9,6 +9,9 @@ import contentCollections from '@content-collections/vite';
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  legacy: {
+    inconsistentCjsInterop: true,
+  },
   plugins: [
     devtools(),
     contentCollections(),
