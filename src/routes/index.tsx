@@ -2,13 +2,13 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { EducationCards } from '@/components/Education';
 import { JobsCards } from '@/components/Jobs';
-import { Separator } from '@/components/ui/Separator';
 import { Container } from '@/components/ui/Container';
+import { Separator } from '@/components/ui/Separator';
 import { Stack } from '@/components/ui/Stack';
 import { Text } from '@/components/ui/Text';
 import { Temporal } from '@js-temporal/polyfill';
 
-import { allJobs, allEducations } from 'content-collections';
+import { allEducations, allJobs } from 'content-collections';
 
 /**
  * Convert the startDate and endDate fields of an item to Temporal.PlainDate.

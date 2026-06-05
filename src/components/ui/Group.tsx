@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
-import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 
 const groupVariants = cva('w-full flex flex-row', {

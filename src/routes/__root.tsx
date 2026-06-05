@@ -1,20 +1,20 @@
-import {
-  HeadContent,
-  Link,
-  Scripts,
-  createRootRoute,
-} from '@tanstack/react-router';
-import type { ErrorComponentProps } from '@tanstack/react-router';
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
+import type { ErrorComponentProps } from '@tanstack/react-router';
+import {
+    HeadContent,
+    Link,
+    Scripts,
+    createRootRoute,
+} from '@tanstack/react-router';
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
-import jetbrains from '@fontsource-variable/jetbrains-mono?url';
-import geist from '@fontsource-variable/geist-mono?url';
-import appCss from '../styles.css?url';
 import { ThemeProvider, ThemeSwitcher } from '@/components/Theme/Provider';
-import type { PropsWithChildren } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Container } from '@/components/ui/Container';
+import { Text } from '@/components/ui/Text';
+import geist from '@fontsource-variable/geist-mono?url';
+import jetbrains from '@fontsource-variable/jetbrains-mono?url';
+import type { PropsWithChildren } from 'react';
+import appCss from '../styles.css?url';
 
 const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='auto'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`;
 

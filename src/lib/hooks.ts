@@ -1,5 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { allJobs, allEducations } from 'content-collections';
+import { allEducations, allJobs } from 'content-collections';
 
 const toTemporal = (date: string | undefined): Temporal.PlainDate => {
   return date

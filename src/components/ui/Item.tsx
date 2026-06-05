@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
+import React from 'react';
 
-import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/Separator';
+import { cn } from '@/lib/utils';
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -184,14 +184,6 @@ function ItemFooter({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 export {
-  Item,
-  ItemMedia,
-  ItemContent,
-  ItemActions,
-  ItemGroup,
-  ItemSeparator,
-  ItemTitle,
-  ItemDescription,
-  ItemHeader,
-  ItemFooter,
+    Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator,
+    ItemTitle
 };

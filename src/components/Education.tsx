@@ -3,8 +3,8 @@ import { Item, ItemContent, ItemGroup } from '@/components/ui/Item';
 import { Separator } from '@/components/ui/Separator';
 import { Stack } from '@/components/ui/Stack';
 import { Text } from '@/components/ui/Text';
-import type { Education as RawEducation } from 'content-collections';
 import type { Temporal } from '@js-temporal/polyfill';
+import type { Education as RawEducation } from 'content-collections';
 
 interface Education extends Omit<RawEducation, 'startDate' | 'endDate'> {
   startDate: Temporal.PlainDate;

@@ -1,14 +1,14 @@
-import { Sun, Moon, Monitor } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
-import type { PropsWithChildren } from 'react';
-import { ScriptOnce } from '@tanstack/react-router';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
-import { Text } from '@/components/ui/Text';
 import { Group } from '@/components/ui/Group';
-import { useTheme } from './hooks';
-import { ThemeProviderContext } from './context';
+import { Text } from '@/components/ui/Text';
+import { cn } from '@/lib/utils';
+import { ScriptOnce } from '@tanstack/react-router';
+import { Monitor, Moon, Sun } from 'lucide-react';
+import type { PropsWithChildren } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Theme } from './context';
+import { ThemeProviderContext } from './context';
+import { useTheme } from './hooks';
 
 type ThemeProviderProps = {
   children: React.ReactNode;
