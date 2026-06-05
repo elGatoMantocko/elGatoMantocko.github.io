@@ -1,8 +1,8 @@
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
 } from '@/components/ui/Card';
 import { Item, ItemContent, ItemGroup } from '@/components/ui/Item';
 import { Separator } from '@/components/ui/Separator';

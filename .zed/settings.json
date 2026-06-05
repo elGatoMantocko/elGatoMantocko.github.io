@@ -5,7 +5,7 @@
 {
   "formatter": [
     { "code_action": "source.fixAll.eslint" },
-    { "code_action": "source.organizeImports" },
+    { "code_action": "source.organizeImports" }
   ],
   "file_scan_exclusions": [
     "**/.git",
@@ -18,7 +18,7 @@
     "**/.classpath",
     "**/.setting",
     "**/routeTree.gen.ts",
-    "**/yarn-*.cjs",
+    "**/yarn-*.cjs"
   ],
   "line_ending": "enforce_lf",
   "ensure_final_newline_on_save": true,
@@ -27,10 +27,10 @@
       "settings": {
         "css": {
           "lint": {
-            "unknownAtRules": "ignore",
-          },
-        },
-      },
-    },
-  },
+            "unknownAtRules": "ignore"
+          }
+        }
+      }
+    }
+  }
 }

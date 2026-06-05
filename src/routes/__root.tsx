@@ -1,16 +1,19 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { ErrorComponentProps } from '@tanstack/react-router';
 import {
-    HeadContent,
-    Link,
-    Scripts,
-    createRootRoute,
+  HeadContent,
+  Link,
+  Outlet,
+  Scripts,
+  createRootRoute,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
 import { ThemeProvider, ThemeSwitcher } from '@/components/Theme/Provider';
 import { Container } from '@/components/ui/Container';
+import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Text } from '@/components/ui/Text';
+import { cn } from '@/lib/utils';
 import geist from '@fontsource-variable/geist-mono?url';
 import jetbrains from '@fontsource-variable/jetbrains-mono?url';
 import type { PropsWithChildren } from 'react';
@@ -23,6 +26,7 @@ const DESCRIPTION = 'Portfolio site by Elliott, for Elliott.';
 
 export const Route = createRootRoute({
   ssr: false,
+  component: RootLayout,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -52,6 +56,73 @@ export const Route = createRootRoute({
   notFoundComponent: NotFound,
   errorComponent: Error,
 });
+
+function RootLayout() {
+  return (
+    <>
+      <Nav />
+      <ScrollArea className="w-full">
+        <Outlet />
+      </ScrollArea>
+    </>
+  );
+}
+
+function Nav() {
+  const linkClass = cn(
+    'text-secondary transition-colors',
+    'hover:text-foreground hover:underline hover:underline-offset-4',
+    'data-[status=active]:text-foreground data-[status=active]:underline data-[status=active]:underline-offset-4',
+  );
+  return (
+    <>
+      <nav className="hidden sm:block">
+        <Container className="last:mb-8">
+          <div className="flex flex-col gap-1">
+            <Link to="/" className={cn(linkClass, 'w-fit')}>
+              <Text margin="none">~/</Text>
+            </Link>
+            <Link to="/work" className={cn(linkClass, 'w-fit')}>
+              <Text margin="none">work</Text>
+            </Link>
+            <Link to="/education" className={cn(linkClass, 'w-fit')}>
+              <Text margin="none">education</Text>
+            </Link>
+          </div>
+        </Container>
+      </nav>
+      <nav className="sm:hidden fixed inset-x-0 bottom-0 z-50 flex border-t border-border bg-background">
+        <Link
+          to="/"
+          className={cn(
+            linkClass,
+            'flex ml-8 items-center justify-center py-4',
+          )}
+        >
+          <Text margin="none">~/</Text>
+        </Link>
+        <Link
+          to="/work"
+          className={cn(
+            linkClass,
+            'flex ml-8 items-center justify-center py-4',
+          )}
+        >
+          <Text margin="none">work</Text>
+        </Link>
+        <Link
+          to="/education"
+          className={cn(
+            linkClass,
+            'flex ml-8 items-center justify-center py-4',
+          )}
+        >
+          <Text margin="none">education</Text>
+        </Link>
+      </nav>
+    </>
+  );
+}
 
 function Error(props: ErrorComponentProps) {
   return (
