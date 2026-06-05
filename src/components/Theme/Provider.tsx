@@ -110,6 +110,20 @@ interface ThemeSwitcherProps {
 export const ThemeSwitcher = ({ position = 'bl' }: ThemeSwitcherProps) => {
   const { theme, setTheme } = useTheme();
   const [hovered, setHovered] = useState(false);
+  const [displayLength, setDisplayLength] = useState(0);
+
+  useEffect(() => {
+    if (!hovered) {
+      setDisplayLength(0);
+      return;
+    }
+    if (displayLength >= theme.length) return;
+    const id = setTimeout(
+      () => setDisplayLength((n) => n + 1),
+      200 / theme.length,
+    );
+    return () => clearTimeout(id);
+  }, [hovered, displayLength, theme]);
 
   const icon = useMemo(() => {
     switch (theme) {
@@ -157,7 +171,10 @@ export const ThemeSwitcher = ({ position = 'bl' }: ThemeSwitcherProps) => {
         >
           {icon}
         </Button>
-        <FlyoutText hidden={!hovered}>{theme}</FlyoutText>
+        <FlyoutText hidden={!hovered}>
+          {theme.slice(0, displayLength)}
+          <span className="animate-blink">|</span>
+        </FlyoutText>
       </Group>
     </div>
   );
