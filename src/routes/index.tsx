@@ -78,9 +78,12 @@ function App() {
       <article>
         <Stack gap={2}>
           <section>
-            <Text variant="title">
-              {TITLE.slice(0, displayLength)}
-              <span className="animate-blink">|</span>
+            <Text variant="title" className="relative">
+              <span aria-hidden="true" className="invisible">{TITLE}</span>
+              <span className="absolute top-0 left-0">
+                {TITLE.slice(0, displayLength)}
+                <span className="animate-blink">|</span>
+              </span>
             </Text>
             <Text variant="h2" color="secondary">
               Driven Full-Stack software engineer with 10+ years of experience
