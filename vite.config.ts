@@ -13,7 +13,9 @@ const config = defineConfig({
     devtools(),
     contentCollections(),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      prerender: { enabled: true },
+    }),
     viteReact(),
   ],
 });

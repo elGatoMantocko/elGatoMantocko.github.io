@@ -1,10 +1,10 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { ErrorComponentProps } from '@tanstack/react-router';
 import {
-    HeadContent,
-    Link,
-    Scripts,
-    createRootRoute,
+  HeadContent,
+  Link,
+  Scripts,
+  createRootRoute,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
@@ -22,6 +22,7 @@ const TITLE = 'Elliott Mantock';
 const DESCRIPTION = 'Portfolio site by Elliott, for Elliott.';
 
 export const Route = createRootRoute({
+  ssr: false,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },

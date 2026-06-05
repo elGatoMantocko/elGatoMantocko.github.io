@@ -48,6 +48,7 @@ function byEndDate(
 }
 
 export const Route = createFileRoute('/')({
+  ssr: false,
   component: App,
 });
 
