@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
 import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
 import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
-import { Slot } from 'radix-ui';
 
 const textVariant = cva('group/text', {
   variants: {

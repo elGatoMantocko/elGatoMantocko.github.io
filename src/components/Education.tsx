@@ -1,9 +1,10 @@
+import type { Temporal } from '@js-temporal/polyfill';
+
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Item, ItemContent, ItemGroup } from '@/components/ui/Item';
 import { Separator } from '@/components/ui/Separator';
 import { Stack } from '@/components/ui/Stack';
 import { Text } from '@/components/ui/Text';
-import type { Temporal } from '@js-temporal/polyfill';
 import type { Education as RawEducation } from 'content-collections';
 
 interface Education extends Omit<RawEducation, 'startDate' | 'endDate'> {
