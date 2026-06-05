@@ -79,7 +79,7 @@ function App() {
         <Stack gap={2}>
           <section>
             <Text variant="title" className="relative">
-              <span aria-hidden="true" className="invisible">{TITLE}</span>
+              <span aria-hidden="true" className="invisible">{TITLE}|</span>
               <span className="absolute top-0 left-0">
                 {TITLE.slice(0, displayLength)}
                 <span className="animate-blink">|</span>
