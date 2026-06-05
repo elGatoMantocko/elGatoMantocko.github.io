@@ -1,10 +1,10 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { ErrorComponentProps } from '@tanstack/react-router';
 import {
-  HeadContent,
-  Link,
-  Scripts,
-  createRootRoute,
+    HeadContent,
+    Link,
+    Scripts,
+    createRootRoute,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
@@ -41,6 +41,8 @@ export const Route = createRootRoute({
       { name: 'og:image', content: '/preview.png' },
     ],
     links: [
+      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: appCss },
       { rel: 'stylesheet', href: jetbrains },
       { rel: 'stylesheet', href: geist },
