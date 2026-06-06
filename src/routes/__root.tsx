@@ -11,6 +11,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
 import { ThemeProvider, ThemeSwitcher } from '@/components/Theme/Provider';
 import { Container } from '@/components/ui/Container';
+import { Group } from '@/components/ui/Group';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/utils';
@@ -60,10 +61,14 @@ export const Route = createRootRoute({
 function RootLayout() {
   return (
     <>
-      <Nav />
-      <ScrollArea className="w-full">
-        <Outlet />
-      </ScrollArea>
+      <Container>
+        <Nav />
+      </Container>
+      <Container>
+        <ScrollArea className="w-full mb-32">
+          <Outlet />
+        </ScrollArea>
+      </Container>
     </>
   );
 }
@@ -77,45 +82,34 @@ function Nav() {
   return (
     <>
       <nav className="hidden sm:block">
-        <Container className="last:mb-8">
-          <div className="flex flex-col gap-1">
-            <Link to="/" className={cn(linkClass, 'w-fit')}>
-              <Text margin="none">~/</Text>
-            </Link>
-            <Link to="/work" className={cn(linkClass, 'w-fit')}>
-              <Text margin="none">work</Text>
-            </Link>
-            <Link to="/education" className={cn(linkClass, 'w-fit')}>
-              <Text margin="none">education</Text>
-            </Link>
-          </div>
-        </Container>
+        <Group>
+          <Link to="/" className={cn(linkClass)}>
+            <Text margin="none">~/</Text>
+          </Link>
+          <Link to="/work" className={cn(linkClass, 'ml-8')}>
+            <Text margin="none">work</Text>
+          </Link>
+          <Link to="/education" className={cn(linkClass, 'ml-8')}>
+            <Text margin="none">education</Text>
+          </Link>
+        </Group>
       </nav>
       <nav className="sm:hidden fixed inset-x-0 bottom-0 z-50 flex border-t border-border bg-background">
         <Link
           to="/"
-          className={cn(
-            linkClass,
-            'flex ml-8 items-center justify-center py-4',
-          )}
+          className={cn(linkClass, 'ml-8 items-center justify-center py-4')}
         >
           <Text margin="none">~/</Text>
         </Link>
         <Link
           to="/work"
-          className={cn(
-            linkClass,
-            'flex ml-8 items-center justify-center py-4',
-          )}
+          className={cn(linkClass, 'ml-8 items-center justify-center py-4')}
         >
           <Text margin="none">work</Text>
         </Link>
         <Link
           to="/education"
-          className={cn(
-            linkClass,
-            'flex ml-8 items-center justify-center py-4',
-          )}
+          className={cn(linkClass, 'ml-8 items-center justify-center py-4')}
         >
           <Text margin="none">education</Text>
         </Link>
