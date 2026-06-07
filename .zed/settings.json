@@ -3,10 +3,24 @@
 // For a full list of overridable settings, and general information on folder-specific settings,
 // see the documentation: https://zed.dev/docs/configuring-zed#settings-files
 {
-  "formatter": [
-    { "code_action": "source.fixAll.eslint" },
-    { "code_action": "source.organizeImports" }
-  ],
+  "format_on_save": "on",
+  "languages": {
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+  },
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
@@ -18,7 +32,7 @@
     "**/.classpath",
     "**/.setting",
     "**/routeTree.gen.ts",
-    "**/yarn-*.cjs"
+    "**/yarn-*.cjs",
   ],
   "line_ending": "enforce_lf",
   "ensure_final_newline_on_save": true,
@@ -27,10 +41,10 @@
       "settings": {
         "css": {
           "lint": {
-            "unknownAtRules": "ignore"
-          }
-        }
-      }
-    }
-  }
+            "unknownAtRules": "ignore",
+          },
+        },
+      },
+    },
+  },
 }

@@ -1,0 +1,10 @@
+# Local state — never commit; use a remote backend for team use
+*.tfstate
+*.tfstate.backup
+
+# Provider downloads
+.terraform/
+
+# Variable files often contain secrets
+*.tfvars
+*.tfvars.json
