@@ -22,6 +22,7 @@ export default [
       '.content-collections',
       '.output',
       '.agents',
+      'routeTree.gen.ts',
     ],
   },
 ];
