@@ -2,18 +2,7 @@ output "pages_url" {
   value = "https://${github_repository_pages.pages.cname}"
 }
 
-output "squarespace_dns_record" {
-  value = <<-EOT
-
-    ── Manual step: add this DNS record in Squarespace ──────────────────────
-    Type:  CNAME
-    Host:  elliott
-    Value: elgatoMantocko.github.io.
-    TTL:   3600 (or Automatic)
-    ─────────────────────────────────────────────────────────────────────────
-
-    Squarespace does not have a Terraform provider, so this record must be
-    added manually under Domains → elliott.mantock.com → DNS Settings.
-
-  EOT
+output "mantock_nameservers" {
+  description = "Paste these into Squarespace → Domains → mantock.com → Nameservers to activate Route 53 DNS"
+  value       = data.aws_route53_zone.mantock.name_servers
 }
