@@ -120,24 +120,24 @@ function Nav() {
 
 function Error(props: ErrorComponentProps) {
   return (
-    <Container>
+    <>
       <Text variant="h1">Error</Text>
       <Text>{props.error.message}</Text>
       <Link to="/" className="text-foreground hover:underline">
         <Text>Return Home</Text>
       </Link>
-    </Container>
+    </>
   );
 }
 
 function NotFound() {
   return (
-    <Container>
+    <>
       <Text variant="h1">There is nothing here.</Text>
       <Link to="/" className="text-foreground hover:underline">
         <Text>Return Home</Text>
       </Link>
-    </Container>
+    </>
   );
 }
 
