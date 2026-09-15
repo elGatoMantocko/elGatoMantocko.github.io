@@ -6773,12 +6773,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^1.17.0":
-  version: 1.17.0
-  resolution: "lucide-react@npm:1.17.0"
+"lucide-react@npm:^1.43.0":
+  version: 1.43.0
+  resolution: "lucide-react@npm:1.43.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/a600d882afceffa5d3479666549e801e201ff5a95c19961648e45fc288cf3d2248a345e563cd3891f3ff3dbc052730121feeb54aa75628b663810159246b9468
+  checksum: 10c0/58619588b6e0ce44d0188d7b0021b3e85e2fd473fbc1b1ef9b6de6f9519eb46b359354747137da26ce215f5efa9435f8b9d8e20c29d4d24471f17de076cb5f79
   languageName: node
   linkType: hard
 
@@ -8113,7 +8113,7 @@ __metadata:
     clsx: "npm:^2.1.1"
     eslint: "npm:^9.39.4"
     jsdom: "npm:^28.1.0"
-    lucide-react: "npm:^1.17.0"
+    lucide-react: "npm:^1.43.0"
     marked: "npm:^15.0.8"
     prettier: "npm:^3.8.3"
     react: "npm:^19.2.6"
