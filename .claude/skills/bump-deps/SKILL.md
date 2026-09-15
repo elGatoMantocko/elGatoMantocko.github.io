@@ -69,6 +69,7 @@ For a package group:
 
 ```
 yarn up <member> [<member> …]
+yarn dedupe                     # collapse duplicate transitive versions in yarn.lock
 git status --porcelain          # expect only package.json and yarn.lock
 yarn lint && yarn test
 ```
@@ -78,6 +79,7 @@ For **yarn itself**:
 ```
 yarn set version berry
 yarn install
+yarn dedupe
 git status --porcelain          # expect .yarnrc.yml, package.json, .yarn/releases/*, maybe yarn.lock
 yarn lint && yarn test
 ```
@@ -110,6 +112,9 @@ Group commit message: `chore(deps): bump <group>/* to <new>` (e.g.
   git checkout -- package.json yarn.lock .yarnrc.yml .yarn/releases && git clean -f .yarn/releases && yarn install   # yarn
   ```
   Record the package as **skipped** with the first few lines of the error.
+
+Always run `yarn dedupe` after the upgrade and before validation, so the
+dedupe churn lands in the same commit as the bump that caused it.
 
 Never use `--no-verify`, `--no-time-gate`, or `git add -A`.
 
