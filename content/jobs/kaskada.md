@@ -4,7 +4,7 @@ company: Kaskada
 location: Seattle, WA
 startDate: 2019-12-01
 endDate: 2021-06-01
-summary: Platform engineer and fifth builder hire; built core launch product from concept to production (0→1).
+summary: Platform engineer and fifth builder hire; built a feature store for a data-science feature engineering platform centered around streaming data, from concept to production (0→1).
 description:
 tags:
   [
