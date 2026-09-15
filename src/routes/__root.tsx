@@ -14,6 +14,7 @@ import { Container } from '@/components/ui/Container';
 import { Group } from '@/components/ui/Group';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Text } from '@/components/ui/Text';
+import { PROFILE } from '@/lib/profile';
 import { cn } from '@/lib/utils';
 import geist from '@fontsource-variable/geist-mono?url';
 import jetbrains from '@fontsource-variable/jetbrains-mono?url';
@@ -22,7 +23,7 @@ import appCss from '../styles.css?url';
 
 const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='auto'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`;
 
-const TITLE = 'Elliott Mantock';
+const TITLE = PROFILE.name;
 const DESCRIPTION = 'Portfolio site by Elliott, for Elliott.';
 
 export const Route = createRootRoute({
@@ -39,8 +40,8 @@ export const Route = createRootRoute({
       { name: 'description', content: DESCRIPTION },
       { name: 'og:description', content: DESCRIPTION },
       // url meta
-      { name: 'url', content: 'https://elliott.mantock.com' },
-      { name: 'og:url', content: 'https://elliott.mantock.com' },
+      { name: 'url', content: PROFILE.siteUrl },
+      { name: 'og:url', content: PROFILE.siteUrl },
       // image meta
       { name: 'image', content: '/preview.png' },
       { name: 'og:image', content: '/preview.png' },
@@ -51,6 +52,8 @@ export const Route = createRootRoute({
       { rel: 'stylesheet', href: appCss },
       { rel: 'stylesheet', href: jetbrains },
       { rel: 'stylesheet', href: geist },
+      // https://llmstxt.org/ — machine-readable description of this site
+      { rel: 'describedby', type: 'text/plain', href: '/llms.txt' },
     ],
   }),
   shellComponent: RootDocument,

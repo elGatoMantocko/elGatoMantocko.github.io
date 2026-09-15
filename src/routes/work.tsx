@@ -9,6 +9,9 @@ import { allJobs } from 'content-collections';
 export const Route = createFileRoute('/work')({
   ssr: false,
   component: Work,
+  head: () => ({
+    links: [{ rel: 'alternate', type: 'text/markdown', href: '/work.md' }],
+  }),
 });
 
 function Work() {

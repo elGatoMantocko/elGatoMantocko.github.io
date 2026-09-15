@@ -9,6 +9,9 @@ import { allEducations } from 'content-collections';
 export const Route = createFileRoute('/education')({
   ssr: false,
   component: Education,
+  head: () => ({
+    links: [{ rel: 'alternate', type: 'text/markdown', href: '/education.md' }],
+  }),
 });
 
 function Education() {

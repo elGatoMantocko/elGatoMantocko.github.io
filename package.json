@@ -3,13 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
+    "dev": "yarn generate:llms && vite dev --port 3000",
+    "build": "yarn generate:llms && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "generate:llms": "node scripts/generate-llms.ts"
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",

@@ -5,3 +5,13 @@ yarn.lock
 .output
 .agents
 routeTree.gen.ts
+
+public/llms.txt
+public/llms-full.txt
+public/work.md
+public/education.md
+
+.zed/settings.json
+terraform/.terraform
+terraform/*.tfstate
+terraform/*.tfstate.backup

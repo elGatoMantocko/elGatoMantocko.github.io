@@ -12,6 +12,7 @@ yarn lint       # ESLint
 yarn format     # Prettier + ESLint --fix
 yarn check      # Prettier --check (no write)
 yarn test       # Vitest (run once)
+yarn generate:llms  # Regenerate public/llms.txt, llms-full.txt, work.md, education.md from content/
 ```
 
 Run a single test file: `yarn test src/path/to/file.test.tsx`
@@ -31,6 +32,8 @@ Run a single test file: `yarn test src/path/to/file.test.tsx`
 **Dates**: Uses the TC39 Temporal API polyfill (`@js-temporal/polyfill`) — prefer `Temporal.PlainDate` over `Date` for content dates. Date conversion utilities live in `src/lib/content.ts`.
 
 **Styling**: Tailwind CSS v4 — configuration is done via `@theme` directives in `src/styles.css` (no `tailwind.config.ts`). Uses oklch color space for theme variables. Custom fonts: JetBrains Mono, Geist Mono.
+
+**LLM-facing files**: `scripts/generate-llms.ts` builds `public/llms.txt`, `public/llms-full.txt`, `public/work.md`, and `public/education.md` (all gitignored) from the content collections, following https://llmstxt.org/. `yarn dev` and `yarn build` run it first; re-run `yarn generate:llms` after editing `content/` during `yarn dev`. The pure renderers live in `src/lib/llms.ts`; shared identity strings (name, tagline, links) live in `src/lib/profile.ts`.
 
 **Path aliases**: `@/` → `src/`
 

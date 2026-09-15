@@ -19,6 +19,7 @@ yarn test      # Vitest (run once)
 yarn lint      # ESLint
 yarn format    # Prettier + ESLint --fix
 yarn check     # Prettier --check (no write)
+yarn generate:llms  # Regenerate the llms.txt files in public/ from content/
 ```
 
 ## Project Structure
@@ -35,6 +36,8 @@ yarn check     # Prettier --check (no write)
 │   │   └── ui/            # Layout primitives and Shadcn/Radix components
 │   ├── lib/
 │   │   ├── content.ts     # Temporal date utilities for content
+│   │   ├── llms.ts        # Renderers for llms.txt / work.md / education.md
+│   │   ├── profile.ts     # Name, tagline, and contact links
 │   │   ├── hooks.ts       # Custom hooks
 │   │   └── utils.ts       # cn() helper (clsx + tailwind-merge)
 │   ├── routes/
@@ -43,7 +46,9 @@ yarn check     # Prettier --check (no write)
 │   │   ├── work.tsx       # Work experience page
 │   │   └── education.tsx  # Education page
 │   └── styles.css         # Global CSS, Tailwind theme, custom fonts
-├── public/                # Static assets
+├── public/                # Static assets (+ generated llms.txt, llms-full.txt, work.md, education.md)
+├── scripts/
+│   └── generate-llms.ts   # Builds the llms.txt files from content-collections
 ├── content-collections.ts # Content schema definitions (Zod)
 └── vite.config.ts
 ```
@@ -60,7 +65,7 @@ jobTitle: Your Job Title
 company: Company Name
 location: City, State
 startDate: 2024-01-01
-endDate: 2024-12-31  # omit for current position
+endDate: 2024-12-31 # omit for current position
 summary: Brief summary of your role
 tags:
   - React
@@ -87,6 +92,10 @@ tags:
 
 Details about your education...
 ```
+
+## LLM-friendly content
+
+Following the [llms.txt proposal](https://llmstxt.org/), the build generates `/llms.txt` (index), `/llms-full.txt` (everything in one file), and clean Markdown versions of the pages (`/work.md`, `/education.md`) from the same content collections that drive the site. They are written to `public/` (gitignored) by `yarn generate:llms`, which `yarn dev` and `yarn build` run automatically.
 
 ## Deploy
 

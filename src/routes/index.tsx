@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Group } from '@/components/ui/Group';
 import { Text } from '@/components/ui/Text';
 import { TypingText } from '@/components/ui/TypingText';
+import { PROFILE } from '@/lib/profile';
 
 export const Route = createFileRoute('/')({
   ssr: false,
@@ -15,15 +16,14 @@ export const Route = createFileRoute('/')({
 function App() {
   return (
     <article>
-      <TypingText text="Elliott Mantock" />
+      <TypingText text={PROFILE.name} />
       <Text variant="h2" color="secondary">
-        Driven Full-Stack software engineer with 10+ years of experience
-        building frontends, APIs, data pipelines, and Infrastructure as Code.
+        {PROFILE.tagline}
       </Text>
       <Group gap={1} className="mt-4 text-secondary">
         <Button variant="ghost" size="icon" asChild>
           <a
-            href="https://github.com/elGatoMantocko"
+            href={PROFILE.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -33,7 +33,7 @@ function App() {
         </Button>
         <Button variant="ghost" size="icon" asChild>
           <a
-            href="https://linkedin.com/in/elliottmantock"
+            href={PROFILE.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -42,7 +42,7 @@ function App() {
           </a>
         </Button>
         <Button variant="ghost" size="icon" asChild>
-          <a href="mailto:emantock@gmail.com" aria-label="Email">
+          <a href={`mailto:${PROFILE.email}`} aria-label="Email">
             <MailIcon />
           </a>
         </Button>
