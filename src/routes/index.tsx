@@ -1,12 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { MailIcon } from 'lucide-react';
+import { MailIcon, SparklesIcon } from 'lucide-react';
 
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
-import { Button } from '@/components/ui/Button';
+import { CopyButton } from '@/components/ui/CopyButton';
+import { FlyoutButton } from '@/components/ui/FlyoutButton';
 import { Group } from '@/components/ui/Group';
 import { Text } from '@/components/ui/Text';
 import { TypingText } from '@/components/ui/TypingText';
 import { PROFILE } from '@/lib/profile';
+import { renderAskPrompt } from '@/lib/prompt';
+import { Button } from '@/components/ui/Button';
 
 export const Route = createFileRoute('/')({
   ssr: false,
@@ -20,7 +23,7 @@ function App() {
       <Text variant="h2" color="secondary">
         {PROFILE.tagline}
       </Text>
-      <Group gap={1} className="mt-4 text-secondary">
+      <Group gap={1} justify="start">
         <Button variant="ghost" size="icon" asChild>
           <a
             href={PROFILE.github}
@@ -46,6 +49,16 @@ function App() {
             <MailIcon />
           </a>
         </Button>
+        <CopyButton
+          component={FlyoutButton}
+          value={renderAskPrompt()}
+          text="Ask AI about me"
+          copiedText="Copied prompt to clipboard"
+          variant="ghost"
+          size="icon"
+        >
+          <SparklesIcon />
+        </CopyButton>
       </Group>
     </article>
   );

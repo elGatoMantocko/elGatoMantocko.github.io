@@ -1,10 +1,7 @@
-import { Button } from '@/components/ui/Button';
-import { Group } from '@/components/ui/Group';
-import { Text } from '@/components/ui/Text';
+import { FlyoutButton } from '@/components/ui/FlyoutButton';
 import { cn } from '@/lib/utils';
 import { ScriptOnce } from '@tanstack/react-router';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import type { PropsWithChildren } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import type { Theme } from './context';
 import { ThemeProviderContext } from './context';
@@ -83,20 +80,6 @@ export function ThemeProvider({
   );
 }
 
-interface FlyoutTextProps {
-  hidden: boolean;
-}
-const FlyoutText = ({
-  hidden,
-  ...props
-}: PropsWithChildren<FlyoutTextProps>) => {
-  return (
-    <div className={cn('my-auto', hidden ? 'invisible' : undefined)}>
-      <Text margin="none" {...props} />
-    </div>
-  );
-};
-
 const POSITIONS = {
   bl: 'bottom-0 left-0',
   br: 'bottom-0 right-0',
@@ -109,21 +92,6 @@ interface ThemeSwitcherProps {
 }
 export const ThemeSwitcher = ({ position = 'bl' }: ThemeSwitcherProps) => {
   const { theme, setTheme } = useTheme();
-  const [hovered, setHovered] = useState(false);
-  const [displayLength, setDisplayLength] = useState(0);
-
-  useEffect(() => {
-    if (!hovered) {
-      setDisplayLength(0);
-      return;
-    }
-    if (displayLength >= theme.length) return;
-    const id = setTimeout(
-      () => setDisplayLength((n) => n + 1),
-      200 / theme.length,
-    );
-    return () => clearTimeout(id);
-  }, [hovered, displayLength, theme]);
 
   const icon = useMemo(() => {
     switch (theme) {
@@ -160,22 +128,15 @@ export const ThemeSwitcher = ({ position = 'bl' }: ThemeSwitcherProps) => {
         'px-7 py-6 md:visible invisible',
       )}
     >
-      <Group grow justify="between">
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-full"
-          onClick={toggleTheme}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {icon}
-        </Button>
-        <FlyoutText hidden={!hovered}>
-          {theme.slice(0, displayLength)}
-          <span className="animate-blink">|</span>
-        </FlyoutText>
-      </Group>
+      <FlyoutButton
+        text={theme}
+        variant="outline"
+        size="icon"
+        className="rounded-full"
+        onClick={toggleTheme}
+      >
+        {icon}
+      </FlyoutButton>
     </div>
   );
 };
