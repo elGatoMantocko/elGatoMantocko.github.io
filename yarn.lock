@@ -419,13 +419,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@content-collections/core@npm:^0.15.1":
-  version: 0.15.1
-  resolution: "@content-collections/core@npm:0.15.1"
+"@content-collections/core@npm:^0.15.2":
+  version: 0.15.2
+  resolution: "@content-collections/core@npm:0.15.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     camelcase: "npm:^8.0.0"
-    chokidar: "npm:^4.0.3"
+    chokidar: "npm:^5.0.0"
     esbuild: "npm:^0.25.11"
     gray-matter: "npm:^4.0.3"
     p-limit: "npm:^6.1.0"
@@ -435,8 +435,8 @@ __metadata:
     tinyglobby: "npm:^0.2.5"
     yaml: "npm:^2.8.3"
   peerDependencies:
-    typescript: ^5.0.2 || ^6.0.0
-  checksum: 10c0/83d55a5310422b9e6ed2f2c873028b0c2f96540a31d120ad4584afca86dd43c00d423f209ff1bc41d4b6847b17896a60d871b7bb4b265ce471f7504917a7bee1
+    typescript: ^5.0.2 || ^6.0.0 || ^7.0.0
+  checksum: 10c0/fa887f66d91bc0e611b1cdb6edc2406b5c87bc9a2450bc3083f55e4424a0f487ddd957180663c97f31b8bfcc0f60d5b45f9d8d723a749d11da7b47ab8a684f4a
   languageName: node
   linkType: hard
 
@@ -3804,15 +3804,6 @@ __metadata:
   version: 2.0.1
   resolution: "character-reference-invalid@npm:2.0.1"
   checksum: 10c0/2ae0dec770cd8659d7e8b0ce24392d83b4c2f0eb4a3395c955dce5528edd4cc030a794cfa06600fcdd700b3f2de2f9b8e40e309c0011c4180e3be64a0b42e6a1
-  languageName: node
-  linkType: hard
-
-"chokidar@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "chokidar@npm:4.0.3"
-  dependencies:
-    readdirp: "npm:^4.0.1"
-  checksum: 10c0/a58b9df05bb452f7d105d9e7229ac82fa873741c0c40ddcc7bb82f8a909fbe3f7814c9ebe9bc9a2bef9b737c0ec6e2d699d179048ef06ad3ec46315df0ebe6ad
   languageName: node
   linkType: hard
 
@@ -8055,7 +8046,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "portfolio@workspace:."
   dependencies:
-    "@content-collections/core": "npm:^0.15.1"
+    "@content-collections/core": "npm:^0.15.2"
     "@content-collections/vite": "npm:^0.3.0"
     "@fontsource-variable/geist-mono": "npm:^5.2.8"
     "@fontsource-variable/jetbrains-mono": "npm:^5.2.8"
@@ -8272,13 +8263,6 @@ __metadata:
   version: 19.2.6
   resolution: "react@npm:19.2.6"
   checksum: 10c0/66afde33b9a9ee87b1e1cae39d8e7e040d1262e719524fd70660c4d4ce79929c532ac19fc3df5a911edaf02768fdf2c49de4ede1ba99bc6aad72796e0e26e798
-  languageName: node
-  linkType: hard
-
-"readdirp@npm:^4.0.1":
-  version: 4.1.2
-  resolution: "readdirp@npm:4.1.2"
-  checksum: 10c0/60a14f7619dec48c9c850255cd523e2717001b0e179dc7037cfa0895da7b9e9ab07532d324bfb118d73a710887d1e35f79c495fa91582784493e085d18c72c62
   languageName: node
   linkType: hard
 
