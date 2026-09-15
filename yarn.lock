@@ -899,17 +899,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource-variable/geist-mono@npm:^5.2.8":
-  version: 5.2.8
-  resolution: "@fontsource-variable/geist-mono@npm:5.2.8"
-  checksum: 10c0/f1d2c596e6fa97e4c33ecf1aa77a3c7af3a41132490d3444905987a71e1404388744dd3cf5abd80dda0225ab5189f46a86aa6e7348737f55b5338635f49d07bc
+"@fontsource-variable/geist-mono@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/geist-mono@npm:5.3.0"
+  checksum: 10c0/21a4097b3ccce08cbc181199f68a9193adc17d997ef8d883eab7565c6d79a82b2f8d7656f32f97b66f1f0b4ebba78a1a822c6318d55e0c5f572d74683ab036ee
   languageName: node
   linkType: hard
 
-"@fontsource-variable/jetbrains-mono@npm:^5.2.8":
-  version: 5.2.8
-  resolution: "@fontsource-variable/jetbrains-mono@npm:5.2.8"
-  checksum: 10c0/574e5463b802cfdd6ec8dd16724d2fd5ee38204815729c9dca0f457a417f0a4d32e6ec4ed2dfa0e5a5de5a9b0deaeb9f3c0b49b332763ed40172de43d6b1502f
+"@fontsource-variable/jetbrains-mono@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/jetbrains-mono@npm:5.3.0"
+  checksum: 10c0/ba983321b530a56696b12390a377c79a962376a33359eeda37c9a2141450802e0b630e6c232d90aab0281179e623d01c77d1bc8059ce595fe865fbc6d6022ffb
   languageName: node
   linkType: hard
 
@@ -8095,8 +8095,8 @@ __metadata:
   dependencies:
     "@content-collections/core": "npm:^0.15.2"
     "@content-collections/vite": "npm:^0.3.0"
-    "@fontsource-variable/geist-mono": "npm:^5.2.8"
-    "@fontsource-variable/jetbrains-mono": "npm:^5.2.8"
+    "@fontsource-variable/geist-mono": "npm:^5.3.0"
+    "@fontsource-variable/jetbrains-mono": "npm:^5.3.0"
     "@js-temporal/polyfill": "npm:^0.5.1"
     "@radix-ui/react-scroll-area": "npm:^1.2.10"
     "@radix-ui/react-separator": "npm:^1.1.8"
