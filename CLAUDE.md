@@ -40,3 +40,7 @@ Run a single test file: `yarn test src/path/to/file.test.tsx`
 ## Adding Content
 
 To add a new job or education entry, create a Markdown file in `content/jobs/` or `content/education/` with the required frontmatter fields defined in `content-collections.ts`.
+
+## Skills
+
+- `/bump-deps` — upgrade dependencies (and Yarn itself) one commit per package or coupled group. Lives in `.claude/skills/bump-deps/`; `scripts/outdated.mjs` there lists outdated packages since Yarn 4 has no `yarn outdated`.
