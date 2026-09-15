@@ -75,6 +75,8 @@ function head(jobs: readonly LlmsJob[]) {
     '',
     `Contact: ${PROFILE.email} · GitHub: ${PROFILE.github} · LinkedIn: ${PROFILE.linkedin}`,
     '',
+    ...PROFILE.details.map(([label, value]) => `${label}: ${value}`),
+    '',
     `Skills: ${aggregateSkills(jobs).join(', ')}`,
   ];
 }

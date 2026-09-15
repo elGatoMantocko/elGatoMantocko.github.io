@@ -59,6 +59,12 @@ describe('renderLlmsTxt', () => {
     expect(lines[2]).toContain(PROFILE.tagline);
   });
 
+  it('includes every profile detail as a "Label: value" line', () => {
+    for (const [label, value] of PROFILE.details) {
+      expect(lines).toContain(`${label}: ${value}`);
+    }
+  });
+
   it('has the expected H2 sections, ending with Optional', () => {
     const headings = lines.filter((l) => l.startsWith('#'));
     expect(headings).toEqual([
