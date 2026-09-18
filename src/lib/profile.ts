@@ -2,7 +2,7 @@
  * Extra context for llms.txt only — not rendered on the site.
  * Each entry becomes a `Label: value` line in the details section.
  */
-const DETAILS: ReadonlyArray<readonly [label: string, value: string]> = [
+const DETAILS = [
   ['Location', 'Seattle, WA (Pacific Time)'],
   [
     'Workplace preference',
@@ -18,7 +18,7 @@ const DETAILS: ReadonlyArray<readonly [label: string, value: string]> = [
   ],
   ['Employment type', 'Full-time preferred; open to contract work.'],
   ['Relocation', 'Not looking to relocate from the Seattle area.'],
-];
+] as const;
 
 export const PROFILE = {
   name: 'Elliott Mantock',

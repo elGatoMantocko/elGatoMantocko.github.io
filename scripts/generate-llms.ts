@@ -1,6 +1,6 @@
 /**
- * Generates the llms.txt family of files (https://llmstxt.org/) into public/
- * from the same content-collections pipeline the site uses.
+ * Generates the llms.txt files (https://llmstxt.org/) into public/ from the
+ * same content-collections pipeline the site uses.
  *
  * Run with `yarn generate:llms` (plain Node; no bundler, so imports are relative).
  */
@@ -11,10 +11,9 @@ import { createBuilder } from '@content-collections/core';
 
 import { byEndDate, withTemporals } from '../src/lib/content.ts';
 import {
-  renderEducationMd,
-  renderLlmsFullTxt,
+  renderEducationLlmsTxt,
   renderLlmsTxt,
-  renderWorkMd,
+  renderWorkLlmsTxt,
 } from '../src/lib/llms.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -29,16 +28,17 @@ const { allJobs, allEducations } =
 const jobs = allJobs.map(withTemporals).sort(byEndDate);
 const educations = allEducations.map(withTemporals);
 
+// One llms.txt per route: the root covers the whole site, each subpath file
+// covers the URLs under it (https://llmstxt.org/).
 const files = {
   'llms.txt': renderLlmsTxt(jobs, educations),
-  'llms-full.txt': renderLlmsFullTxt(jobs, educations),
-  'work.md': renderWorkMd(jobs),
-  'education.md': renderEducationMd(educations),
+  'work/llms.txt': renderWorkLlmsTxt(jobs),
+  'education/llms.txt': renderEducationLlmsTxt(educations),
 };
 
-await mkdir(publicDir, { recursive: true });
 for (const [name, body] of Object.entries(files)) {
   const file = path.join(publicDir, name);
+  await mkdir(path.dirname(file), { recursive: true });
   await writeFile(file, body, 'utf8');
   console.log(`wrote ${path.relative(root, file)}`);
 }

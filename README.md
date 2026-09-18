@@ -19,7 +19,7 @@ yarn test      # Vitest (run once)
 yarn lint      # ESLint
 yarn format    # Prettier + ESLint --fix
 yarn check     # Prettier --check (no write)
-yarn generate:llms  # Regenerate the llms.txt files in public/ from content/
+yarn generate:llms  # Regenerate public/llms.txt, work/llms.txt, education/llms.txt from content/
 ```
 
 ## Project Structure
@@ -36,7 +36,7 @@ yarn generate:llms  # Regenerate the llms.txt files in public/ from content/
 │   │   └── ui/            # Layout primitives and Shadcn/Radix components
 │   ├── lib/
 │   │   ├── content.ts     # Temporal date utilities for content
-│   │   ├── llms.ts        # Renderers for llms.txt / work.md / education.md
+│   │   ├── llms.ts        # Renderers for the llms.txt files
 │   │   ├── profile.ts     # Name, tagline, and contact links
 │   │   ├── hooks.ts       # Custom hooks
 │   │   └── utils.ts       # cn() helper (clsx + tailwind-merge)
@@ -46,7 +46,7 @@ yarn generate:llms  # Regenerate the llms.txt files in public/ from content/
 │   │   ├── work.tsx       # Work experience page
 │   │   └── education.tsx  # Education page
 │   └── styles.css         # Global CSS, Tailwind theme, custom fonts
-├── public/                # Static assets (+ generated llms.txt, llms-full.txt, work.md, education.md)
+├── public/                # Static assets (+ generated llms.txt, work/llms.txt, education/llms.txt)
 ├── scripts/
 │   └── generate-llms.ts   # Builds the llms.txt files from content-collections
 ├── content-collections.ts # Content schema definitions (Zod)
@@ -95,7 +95,7 @@ Details about your education...
 
 ## LLM-friendly content
 
-Following the [llms.txt proposal](https://llmstxt.org/), the build generates `/llms.txt` (index), `/llms-full.txt` (everything in one file), and clean Markdown versions of the pages (`/work.md`, `/education.md`) from the same content collections that drive the site. They are written to `public/` (gitignored) by `yarn generate:llms`, which `yarn dev` and `yarn build` run automatically.
+Following the [llms.txt proposal](https://llmstxt.org/), the build generates one `llms.txt` per route from the same content collections that drive the site: `/llms.txt` covers the whole profile, and `/work/llms.txt` and `/education/llms.txt` cover their sections. Each file has the same shape — H1, summary blockquote, every entry inline as heading-free Markdown, then a single `## Optional` link list. They are written to `public/` (gitignored) by `yarn generate:llms`, which `yarn dev` and `yarn build` run automatically.
 
 ## Deploy
 

@@ -1,33 +1,17 @@
-import type { Temporal } from '@js-temporal/polyfill';
-
+import type { Temporalized } from './content.ts';
 import { PROFILE } from './profile.ts';
 
+import type { Education, Job } from 'content-collections';
+
 /**
- * Renderers for the llms.txt family of files (https://llmstxt.org/).
+ * Renderers for the llms.txt files (https://llmstxt.org/).
  * Pure functions over already-sorted content so they can be unit tested and
  * run from a plain Node script.
  */
 
-export interface LlmsJob {
-  jobTitle: string;
-  company: string;
-  location: string;
-  summary: string;
-  tags: readonly string[];
-  content: string;
-  startDate: Temporal.PlainDate;
-  endDate: Temporal.PlainDate | undefined;
-}
-
-export interface LlmsEducation {
-  school: string;
-  summary: string;
-  location: string;
-  tags: readonly string[];
-  content: string;
-  startDate: Temporal.PlainDate;
-  endDate: Temporal.PlainDate | undefined;
-}
+/** Content-collection documents after `withTemporals`; `_meta` is unused. */
+export type LlmsJob = Temporalized<Omit<Job, '_meta'>>;
+export type LlmsEducation = Temporalized<Omit<Education, '_meta'>>;
 
 const MONTH_YEAR = { year: 'numeric', month: 'short' } as const;
 
@@ -75,12 +59,43 @@ function head(jobs: readonly LlmsJob[]) {
     '',
     `Contact: ${PROFILE.email} · GitHub: ${PROFILE.github} · LinkedIn: ${PROFILE.linkedin}`,
     '',
-    ...PROFILE.details.map(([label, value]) => `${label}: ${value}`),
+    ...PROFILE.details.map(([label, value]) => `${label}: ${value}` as const),
     '',
     `Skills: ${aggregateSkills(jobs).join(', ')}`,
+  ] as const;
+}
+
+/**
+ * One job as a nested list item. The spec forbids headings between the
+ * blockquote and the H2 file lists, so entries use a bold title instead.
+ */
+function jobEntry(job: LlmsJob) {
+  return [
+    `- **${job.jobTitle} — ${job.company}** (${jobDates(job)} · ${job.location})`,
+    `  ${job.summary}`,
+    ...(job.tags.length > 0 ? [`  Skills: ${job.tags.join(', ')}`] : []),
+    ...lines(job.content).map((line) => `  - ${line}`),
   ];
 }
 
+function educationEntry(education: LlmsEducation) {
+  return [
+    `- **${education.summary} — ${education.school}** (${educationDates(education)} · ${education.location})`,
+    ...(education.tags.length > 0
+      ? [`  Skills: ${education.tags.join(', ')}`]
+      : []),
+    ...lines(education.content).map((line) => `  - ${line}`),
+  ];
+}
+
+const WORK_URL = `${PROFILE.siteUrl}/work/llms.txt`;
+const EDUCATION_URL = `${PROFILE.siteUrl}/education/llms.txt`;
+
+/**
+ * The whole portfolio in one file, shaped per https://llmstxt.org/: H1,
+ * blockquote, heading-free detail, then a single H2 "file list". Everything
+ * a reader needs is inline; the links only offer the same content per route.
+ */
 export function renderLlmsTxt(
   jobs: readonly LlmsJob[],
   educations: readonly LlmsEducation[],
@@ -88,100 +103,58 @@ export function renderLlmsTxt(
   const out = [
     ...head(jobs),
     '',
-    '## Work Experience',
+    '**Work Experience** (newest first)',
     '',
-    ...jobs.map(
-      (job) =>
-        `- [${job.jobTitle}, ${job.company} (${jobDates(job)})](${PROFILE.siteUrl}/work.md): ${job.summary}`,
-    ),
+    ...jobs.flatMap(jobEntry),
     '',
-    '## Education',
+    '**Education**',
     '',
-    ...educations.map(
-      (education) =>
-        `- [${education.summary}, ${education.school} (${educationDates(education)})](${PROFILE.siteUrl}/education.md): ${[education.location, lines(education.content)[0]].filter(Boolean).join('; ')}`,
-    ),
+    ...educations.flatMap(educationEntry),
     '',
     '## Optional',
     '',
-    `- [Full portfolio](${PROFILE.siteUrl}/llms-full.txt): everything above plus per-role detail in one file`,
-    `- [Portfolio site](${PROFILE.siteUrl}): interactive version (client-rendered; prefer the .md links above)`,
+    `- [Work Experience](${WORK_URL}): the work history above on its own`,
+    `- [Education](${EDUCATION_URL}): the education history above on its own`,
+    `- [Portfolio site](${PROFILE.siteUrl}): interactive version (client-rendered; this file is the canonical source)`,
   ];
   return out.join('\n') + '\n';
 }
 
-function workBody(jobs: readonly LlmsJob[]) {
-  return jobs.flatMap((job) => [
-    `## ${job.jobTitle} — ${job.company}`,
+/** Link back to the root file from a per-route one. */
+function rootLink() {
+  return [
+    '## Optional',
     '',
-    `- Location: ${job.location}`,
-    `- Dates: ${jobDates(job)}`,
-    ...(job.tags.length > 0 ? [`- Skills: ${job.tags.join(', ')}`] : []),
-    '',
-    job.summary,
-    '',
-    ...lines(job.content).map((line) => `- ${line}`),
-    '',
-  ]);
+    `- [${PROFILE.name}](${PROFILE.siteUrl}/llms.txt): full profile — contact details, skills, work experience, and education`,
+  ] as const;
 }
 
-function educationBody(educations: readonly LlmsEducation[]) {
-  return educations.flatMap((education) => [
-    `## ${education.summary} — ${education.school}`,
-    '',
-    `- Location: ${education.location}`,
-    `- Dates: ${educationDates(education)}`,
-    ...(education.tags.length > 0
-      ? [`- Skills: ${education.tags.join(', ')}`]
-      : []),
-    '',
-    ...lines(education.content).map((line) => `- ${line}`),
-    '',
-  ]);
-}
-
-export function renderWorkMd(jobs: readonly LlmsJob[]) {
+/** Per-route file for /work, covering the URLs under that path. */
+export function renderWorkLlmsTxt(jobs: readonly LlmsJob[]) {
   return (
     [
-      '# Work Experience',
+      `# ${PROFILE.name} — Work Experience`,
       '',
-      `${PROFILE.name}'s work history, newest first. Source: ${PROFILE.siteUrl}/work`,
+      `> ${PROFILE.name}'s work history, newest first.`,
       '',
-      ...workBody(jobs),
+      ...jobs.flatMap(jobEntry),
+      '',
+      ...rootLink(),
     ].join('\n') + '\n'
   );
 }
 
-export function renderEducationMd(educations: readonly LlmsEducation[]) {
+/** Per-route file for /education, covering the URLs under that path. */
+export function renderEducationLlmsTxt(educations: readonly LlmsEducation[]) {
   return (
     [
-      '# Education',
+      `# ${PROFILE.name} — Education`,
       '',
-      `${PROFILE.name}'s education history. Source: ${PROFILE.siteUrl}/education`,
+      `> ${PROFILE.name}'s education history.`,
       '',
-      ...educationBody(educations),
-    ].join('\n') + '\n'
-  );
-}
-
-export function renderLlmsFullTxt(
-  jobs: readonly LlmsJob[],
-  educations: readonly LlmsEducation[],
-) {
-  return (
-    [
-      ...head(jobs),
+      ...educations.flatMap(educationEntry),
       '',
-      '## Work Experience',
-      '',
-      ...workBody(jobs).map((line) =>
-        line.startsWith('## ') ? `#${line}` : line,
-      ),
-      '## Education',
-      '',
-      ...educationBody(educations).map((line) =>
-        line.startsWith('## ') ? `#${line}` : line,
-      ),
+      ...rootLink(),
     ].join('\n') + '\n'
   );
 }

@@ -4,10 +4,9 @@ import { describe, expect, it } from 'vitest';
 import { PROFILE } from './profile.ts';
 import {
   aggregateSkills,
-  renderEducationMd,
-  renderLlmsFullTxt,
+  renderEducationLlmsTxt,
   renderLlmsTxt,
-  renderWorkMd,
+  renderWorkLlmsTxt,
 } from './llms.ts';
 import type { LlmsEducation, LlmsJob } from './llms.ts';
 
@@ -65,33 +64,50 @@ describe('renderLlmsTxt', () => {
     }
   });
 
-  it('has the expected H2 sections, ending with Optional', () => {
+  it('has no headings other than the H1 and a trailing Optional H2', () => {
     const headings = lines.filter((l) => l.startsWith('#'));
-    expect(headings).toEqual([
-      `# ${PROFILE.name}`,
-      '## Work Experience',
-      '## Education',
-      '## Optional',
-    ]);
+    expect(headings).toEqual([`# ${PROFILE.name}`, '## Optional']);
   });
 
-  it('only uses [name](url): notes lines inside H2 sections', () => {
-    const firstH2 = lines.indexOf('## Work Experience');
+  it('inlines every job and school with its details', () => {
+    expect(txt).toContain(
+      '- **Staff Engineer — Acme** (May 2022 – Present · Seattle, WA)',
+    );
+    expect(txt).toContain('  Built the thing.');
+    expect(txt).toContain('  Skills: Typescript, React');
+    expect(txt).toContain('  - Did A.\n  - Did B.');
+    expect(txt).toContain(
+      '- **BS, Computer Science — State U** (2010 – 2016 · Somewhere, IN)',
+    );
+    expect(txt).toContain('  - Clubs: chess.\n  - Studied things.');
+  });
+
+  it('omits the Skills line when there are no tags', () => {
+    const [, ...education] = txt.split('**Education**');
+    expect(education.join('')).not.toContain('Skills:');
+  });
+
+  it('only uses [name](url): notes lines inside the H2 section', () => {
     const body = lines
-      .slice(firstH2)
-      .filter((l) => l !== '' && !l.startsWith('## '));
+      .slice(lines.indexOf('## Optional') + 1)
+      .filter((l) => l !== '');
     expect(body.length).toBeGreaterThan(0);
     for (const line of body) expect(line).toMatch(FILE_LIST_LINE);
   });
 
-  it('renders open-ended jobs as Present and marks them current', () => {
-    expect(txt).toContain('(May 2022 – Present)');
+  it('links to the per-route files and the site', () => {
+    expect(txt).toContain(`](${PROFILE.siteUrl}/work/llms.txt)`);
+    expect(txt).toContain(`](${PROFILE.siteUrl}/education/llms.txt)`);
+    expect(txt).toContain(`](${PROFILE.siteUrl})`);
+  });
+
+  it('marks open-ended jobs as current', () => {
     expect(lines[2]).toContain('Currently Staff Engineer at Acme');
   });
 
   it('lists jobs in the order given (newest first)', () => {
-    expect(txt.indexOf('Staff Engineer, Acme')).toBeLessThan(
-      txt.indexOf('Engineer, Initech'),
+    expect(txt.indexOf('Staff Engineer — Acme')).toBeLessThan(
+      txt.indexOf('Engineer — Initech'),
     );
   });
 
@@ -107,33 +123,35 @@ describe('aggregateSkills', () => {
   });
 });
 
-describe('markdown pages', () => {
-  it('renderWorkMd has an H2 per job with bullets from content lines', () => {
-    const md = renderWorkMd(jobs);
-    expect(md.split('\n')[0]).toBe('# Work Experience');
-    expect(md).toContain('## Staff Engineer — Acme');
-    expect(md).toContain('## Engineer — Initech');
-    expect(md).toContain('- Dates: Jul 2016 – Apr 2018');
-    expect(md).toContain('- Did A.\n- Did B.');
-  });
-
-  it('renderEducationMd omits the Skills line when there are no tags', () => {
-    const md = renderEducationMd(educations);
-    expect(md).toContain('## BS, Computer Science — State U');
-    expect(md).toContain('- Dates: 2010 – 2016');
-    expect(md).not.toContain('- Skills:');
-  });
-
-  it('renderLlmsFullTxt nests page sections under the index H2s', () => {
-    const full = renderLlmsFullTxt(jobs, educations);
-    const headings = full.split('\n').filter((l) => l.startsWith('#'));
-    expect(headings).toEqual([
-      `# ${PROFILE.name}`,
-      '## Work Experience',
-      '### Staff Engineer — Acme',
-      '### Engineer — Initech',
-      '## Education',
-      '### BS, Computer Science — State U',
+describe('per-route files', () => {
+  it.each([
+    ['work', renderWorkLlmsTxt(jobs)],
+    ['education', renderEducationLlmsTxt(educations)],
+  ])('%s follows the same H1 / blockquote / Optional shape', (_, txt) => {
+    const lines = txt.split('\n');
+    expect(lines[0]).toMatch(new RegExp(`^# ${PROFILE.name} — `));
+    expect(lines[2]).toMatch(/^> /);
+    expect(lines.filter((l) => l.startsWith('#'))).toEqual([
+      lines[0],
+      '## Optional',
     ]);
+    const body = lines
+      .slice(lines.indexOf('## Optional') + 1)
+      .filter((l) => l !== '');
+    for (const line of body) expect(line).toMatch(FILE_LIST_LINE);
+    expect(txt).toContain(`](${PROFILE.siteUrl}/llms.txt)`);
+  });
+
+  it('renderWorkLlmsTxt inlines every job', () => {
+    const txt = renderWorkLlmsTxt(jobs);
+    expect(txt).toContain('- **Staff Engineer — Acme** (May 2022 – Present');
+    expect(txt).toContain('- **Engineer — Initech** (Jul 2016 – Apr 2018');
+    expect(txt).toContain('  - Did A.\n  - Did B.');
+  });
+
+  it('renderEducationLlmsTxt omits the Skills line when there are no tags', () => {
+    const txt = renderEducationLlmsTxt(educations);
+    expect(txt).toContain('- **BS, Computer Science — State U** (2010 – 2016');
+    expect(txt).not.toContain('Skills:');
   });
 });

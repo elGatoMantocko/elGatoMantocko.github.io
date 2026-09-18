@@ -10,7 +10,9 @@ export const Route = createFileRoute('/education')({
   ssr: false,
   component: Education,
   head: () => ({
-    links: [{ rel: 'alternate', type: 'text/markdown', href: '/education.md' }],
+    links: [
+      { rel: 'describedby', type: 'text/plain', href: '/education/llms.txt' },
+    ],
   }),
 });
 

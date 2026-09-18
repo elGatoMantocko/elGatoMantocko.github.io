@@ -1,13 +1,20 @@
 import { Temporal } from '@js-temporal/polyfill';
 
-export function withTemporals<
-  T extends { startDate: string; endDate?: string | undefined },
->(
-  item: T,
-): Omit<T, 'startDate' | 'endDate'> & {
+interface DateStrings {
+  startDate: string;
+  endDate?: string | undefined;
+}
+
+/** `T` with its ISO date strings replaced by `Temporal.PlainDate`s. */
+export type Temporalized<T extends DateStrings> = Omit<
+  T,
+  'startDate' | 'endDate'
+> & {
   startDate: Temporal.PlainDate;
   endDate: Temporal.PlainDate | undefined;
-} {
+};
+
+export function withTemporals<T extends DateStrings>(item: T): Temporalized<T> {
   return {
     ...item,
     startDate: Temporal.PlainDate.from(item.startDate),
